@@ -1,0 +1,7 @@
+/node_modules
+/vendor
+/.idea
+.idea/
+.evn
+
+# Folder or file tren khong day len Git
