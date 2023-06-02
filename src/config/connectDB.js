@@ -1,5 +1,5 @@
 // const { Sequelize } = require('sequelize');
-import Sequelize from 'sequelize';
+import Sequelize from "sequelize";
 
 // // Option 1: Passing a connection URI
 // const sequelize = new Sequelize('sqlite::memory:') // Example for sqlite
@@ -16,22 +16,22 @@ import Sequelize from 'sequelize';
 // let username = "root";
 // let password = "43214321";
 
-const sequelize = new Sequelize('testnodejs', 'root', '43214321', {
-  host: 'localhost',
-  dialect: 'mysql'
+const sequelize = new Sequelize("testnodejs", "root", "43214321", {
+  host: "localhost",
+  dialect: "mysql",
+  logging: false,
   /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */
+  // logging: false se khong hien thi cau lenh query ra ngoai man hinh Terminal
 });
 
-console.log('Hi connect DB');
-
-let connectDB = async() => {
-  console.log('Hi connect DB');
-    try {
-        await sequelize.authenticate();
-        console.log('Connection DB has been established successfully.');
-      } catch (error) {
-        console.error('Unable to connect to the database:', error);
-      }
-}
+let connectDB = async () => {
+  // console.log('Hi connect DB');
+  try {
+    await sequelize.authenticate();
+    console.log("Connection DB has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
 
 module.exports = connectDB;
