@@ -3,11 +3,15 @@ import bodyParser from "body-parser";
 import viewEngine from "./config/viewEngine";
 import initWebRouters from "./route/web";
 import connectDB from "./config/connectDB";
+import cors from "cors";
 
 // to run process.env
 require("dotenv").config();
 
 let app = express();
+
+// "cors": only run api theo domain
+app.use(cors({ origin: true }));
 
 // config app
 app.use(bodyParser.json());
