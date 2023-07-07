@@ -10,7 +10,7 @@ let handleUserLoginService = (email, password) => {
         // check again user already exist
         let user = await db.User.findOne({
           where: { email: email }, // kiem tra emailUser == email o DB ko?
-          //   attributes: ["email", "password", "roleid"],
+          attributes: ["email", "password", "roleid"],
           raw: true,
         });
         if (user) {
@@ -20,7 +20,7 @@ let handleUserLoginService = (email, password) => {
           if (checkPass) {
             userData.errCode = 0;
             userData.errMessage = "Password OK";
-            console.log(user);
+            console.log("handleUserLoginService: ", user);
             delete user.password;
             userData.user = user;
           } else {
@@ -64,6 +64,37 @@ let checkUserEmailService = (emailUser) => {
   });
 };
 
+let getAllUsers = (userId) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      let users = "";
+      if (userId == "ALL") {
+        users = await db.User.findAll({
+          attributes: {
+            exclude: ["password"],
+          },
+          // raw: only display user array
+          // raw: true,
+        });
+      }
+      if (userId && userId != "ALL") {
+        users = await db.User.findOne({
+          where: { id: userId }, // kiem tra emailUser == email o DB ko?
+          attributes: {
+            exclude: ["password"],
+          },
+          // raw: true,
+        });
+      }
+      // console.log(users);
+      resolve(users);
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
+
 module.exports = {
   handleUserLoginService: handleUserLoginService,
+  getAllUsers: getAllUsers,
 };
