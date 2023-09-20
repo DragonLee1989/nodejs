@@ -14,14 +14,14 @@ let handleLogin = async (req, res) => {
   if (!email || !password) {
     return res.status(500).json({
       errCode: 1,
-      message: "Missing login parameter!",
+      errMessage: "Missing login parameter!",
     });
   }
   let userData = await userService.handleUserLoginService(email, password);
 
   return res.status(200).json({
     errCode: userData.errCode,
-    message: userData.errMessage,
+    errMessage: userData.errMessage,
     infoUser: userData.user ? userData.user : {},
   });
 };
@@ -48,7 +48,7 @@ let handleGetAllUsers = async (req, res) => {
 
 let handleCreateNewUser = async (req, res) => {
   let message = await userService.createNewUser(req.body);
-  // console.log(message);
+  console.log("Message of handleCreateNewUser at userController", message);
   return res.status(200).json({ message });
 };
 let handleDeleteUser = async (req, res) => {

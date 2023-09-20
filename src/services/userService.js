@@ -121,7 +121,7 @@ let createNewUser = (data) => {
         });
         resolve({
           errCode: 0,
-          message: "Created New User on API",
+          errMessage: "Created New User on API",
         });
       }
     } catch (error) {
@@ -166,7 +166,7 @@ let deleteUser = (userId) => {
       });
       resolve({
         errCode: 0,
-        message: "Deleted User on API",
+        errMessage: "Deleted User on API",
       }); // thoat ra ko tra ket qua <=> ham return
     } catch (error) {
       reject(error);
@@ -181,7 +181,7 @@ let updateUserData = (data) => {
       if (!data.id) {
         resolve({
           errCode: 2,
-          message: "Dang nhap ID User on Edit API",
+          errMessage: "Dang nhap ID User on Edit API",
         });
       }
       let user = await db.User.findOne({
@@ -196,12 +196,12 @@ let updateUserData = (data) => {
 
         resolve({
           errCode: 0,
-          message: "Updated User on API",
+          errMessage: "Updated User on API",
         });
       } else {
         resolve({
           errCode: 1,
-          message: "Khong co User on Edit API",
+          errMessage: "Khong co User on Edit API",
         });
       }
     } catch (error) {
